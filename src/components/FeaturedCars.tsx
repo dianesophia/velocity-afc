@@ -18,10 +18,10 @@ const CarCard = ({ car, index }: { car: (typeof cars)[0]; index: number }) => {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 80, rotateX: -5 }}
-      animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
-      transition={{ delay: index * 0.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -12, transition: { duration: 0.4, ease: "easeOut" } }}
+      initial={{ opacity: 0, y: 80, rotateY: -8 }}
+      animate={inView ? { opacity: 1, y: 0, rotateY: 0 } : {}}
+      transition={{ delay: index * 0.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -12, rotateY: 2, transition: { duration: 0.4, ease: "easeOut" } }}
       className="group relative overflow-hidden rounded-lg card-shadow cursor-pointer"
     >
       <div className="aspect-[4/3] overflow-hidden">
@@ -42,6 +42,12 @@ const CarCard = ({ car, index }: { car: (typeof cars)[0]; index: number }) => {
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 p-6">
+        <motion.div
+          initial={{ width: 0 }}
+          animate={inView ? { width: "2rem" } : {}}
+          transition={{ delay: index * 0.2 + 0.3, duration: 0.6 }}
+          className="h-px bg-primary mb-4"
+        />
         <motion.p
           initial={{ opacity: 0, x: -10 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -69,10 +75,7 @@ const CarCard = ({ car, index }: { car: (typeof cars)[0]; index: number }) => {
 
         <div className="mt-4 flex items-center gap-2 text-sm text-primary opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
           <span className="uppercase tracking-wider font-medium">Discover</span>
-          <motion.span
-            className="inline-block"
-            whileHover={{ x: 4 }}
-          >
+          <motion.span className="inline-block" whileHover={{ x: 4 }}>
             <ArrowRight size={14} />
           </motion.span>
         </div>
@@ -80,7 +83,7 @@ const CarCard = ({ car, index }: { car: (typeof cars)[0]; index: number }) => {
 
       {/* Shine effect on hover */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none overflow-hidden">
-        <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/5 to-transparent rotate-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+        <div className="absolute -inset-full bg-gradient-to-r from-transparent via-foreground/5 to-transparent rotate-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
       </div>
     </motion.div>
   );
@@ -92,7 +95,14 @@ const FeaturedCars = () => {
 
   return (
     <section id="models" className="py-32 relative">
-      <div className="container mx-auto px-6">
+      {/* Animated background accent */}
+      <motion.div
+        className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/5 blur-3xl"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      
+      <div className="container mx-auto px-6 relative">
         <motion.div
           ref={headingRef}
           initial={{ opacity: 0, y: 40 }}
