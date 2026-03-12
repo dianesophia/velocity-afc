@@ -11,9 +11,17 @@ const Footer = () => {
       initial={{ opacity: 0 }}
       animate={inView ? { opacity: 1 } : {}}
       transition={{ duration: 0.8 }}
-      className="border-t border-border py-12"
+      className="border-t border-border py-12 relative overflow-hidden"
     >
-      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      {/* Subtle animated gradient */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "linear-gradient(90deg, transparent, hsl(var(--primary) / 0.02), transparent)" }}
+        animate={{ x: ["-100%", "100%"] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+      />
+
+      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 relative">
         <motion.p
           initial={{ opacity: 0, x: -20 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}

@@ -6,6 +6,46 @@
 
 @layer base {
   :root {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 42 100% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 92%;
+    --secondary-foreground: 0 0% 15%;
+
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 42 100% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 42 100% 45%;
+
+    --radius: 0.5rem;
+
+    --font-display: 'Outfit', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+
+    --gradient-gold: linear-gradient(135deg, hsl(42, 100%, 45%), hsl(32, 100%, 55%));
+    --gradient-dark: linear-gradient(180deg, hsl(0, 0%, 96%), hsl(0, 0%, 100%));
+    --shadow-glow: 0 0 40px hsl(42 100% 45% / 0.2);
+    --shadow-card: 0 20px 60px hsl(0 0% 0% / 0.08);
+  }
+
+  .dark {
     --background: 0 0% 4%;
     --foreground: 0 0% 95%;
 
@@ -33,11 +73,6 @@
     --border: 0 0% 16%;
     --input: 0 0% 16%;
     --ring: 42 100% 50%;
-
-    --radius: 0.5rem;
-
-    --font-display: 'Outfit', sans-serif;
-    --font-body: 'Space Grotesk', sans-serif;
 
     --gradient-gold: linear-gradient(135deg, hsl(42, 100%, 50%), hsl(32, 100%, 60%));
     --gradient-dark: linear-gradient(180deg, hsl(0, 0%, 4%), hsl(0, 0%, 8%));

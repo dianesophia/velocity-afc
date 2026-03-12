@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const navItems = ["Models", "Performance", "Gallery", "Contact"];
 
@@ -49,34 +50,40 @@ const Navbar = () => {
           ))}
         </div>
 
-        <motion.button
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.8, duration: 0.4 }}
-          whileHover={{ scale: 1.05, boxShadow: "0 0 30px hsl(42 100% 50% / 0.3)" }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-gradient-gold px-6 py-2 rounded-sm text-sm font-semibold uppercase tracking-wider text-primary-foreground hidden md:block"
-        >
-          Configure
-        </motion.button>
+        <div className="hidden md:flex items-center gap-4">
+          <ThemeToggle />
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.8, duration: 0.4 }}
+            whileHover={{ scale: 1.05, boxShadow: "0 0 30px hsl(42 100% 50% / 0.3)" }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-gradient-gold px-6 py-2 rounded-sm text-sm font-semibold uppercase tracking-wider text-primary-foreground"
+          >
+            Configure
+          </motion.button>
+        </div>
 
-        <motion.button
-          className="md:hidden text-foreground"
-          onClick={() => setOpen(!open)}
-          whileTap={{ scale: 0.9 }}
-        >
-          <AnimatePresence mode="wait">
-            {open ? (
-              <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                <X size={24} />
-              </motion.div>
-            ) : (
-              <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                <Menu size={24} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.button>
+        <div className="md:hidden flex items-center gap-3">
+          <ThemeToggle />
+          <motion.button
+            className="text-foreground"
+            onClick={() => setOpen(!open)}
+            whileTap={{ scale: 0.9 }}
+          >
+            <AnimatePresence mode="wait">
+              {open ? (
+                <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <X size={24} />
+                </motion.div>
+              ) : (
+                <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <Menu size={24} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
+        </div>
       </div>
 
       <AnimatePresence>

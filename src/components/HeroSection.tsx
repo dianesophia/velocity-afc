@@ -50,6 +50,20 @@ const HeroSection = () => {
         className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent skew-x-12 pointer-events-none"
       />
 
+      {/* Animated grid lines */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={`vline-${i}`}
+            className="absolute top-0 bottom-0 w-px bg-border/10"
+            style={{ left: `${20 + i * 15}%` }}
+            initial={{ scaleY: 0, opacity: 0 }}
+            animate={{ scaleY: 1, opacity: 1 }}
+            transition={{ delay: 2 + i * 0.2, duration: 1.5, ease: "easeOut" }}
+          />
+        ))}
+      </div>
+
       {/* Content */}
       <motion.div style={{ y: contentY, opacity: contentOpacity }} className="relative container mx-auto px-6 pt-24">
         <div className="max-w-2xl">
@@ -119,7 +133,7 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Stats with counting animation */}
+        {/* Stats */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -136,7 +150,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.8 + i * 0.15, duration: 0.6, ease: "easeOut" }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              whileHover={{ y: -4, scale: 1.05, transition: { duration: 0.2 } }}
             >
               <p className="font-display text-3xl md:text-4xl font-bold text-gradient-gold">{stat.value}</p>
               <p className="text-xs uppercase tracking-widest text-muted-foreground mt-1">{stat.label}</p>

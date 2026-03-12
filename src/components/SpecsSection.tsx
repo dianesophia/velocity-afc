@@ -21,36 +21,47 @@ const SpecCard = ({ spec, index, inView }: { spec: (typeof specs)[0]; index: num
         borderColor: "hsl(42 100% 50% / 0.3)",
         transition: { duration: 0.3 },
       }}
-      className="glass-panel rounded-lg p-6 group cursor-default"
+      className="glass-panel rounded-lg p-6 group cursor-default relative overflow-hidden"
     >
+      {/* Background glow on hover */}
       <motion.div
-        initial={{ scale: 0, rotate: -45 }}
-        animate={inView ? { scale: 1, rotate: 0 } : {}}
-        transition={{ delay: index * 0.15 + 0.3, duration: 0.5, type: "spring", stiffness: 200 }}
-      >
-        <spec.icon className="text-primary mb-4 group-hover:drop-shadow-[0_0_8px_hsl(42_100%_50%/0.5)] transition-all duration-300" size={28} strokeWidth={1.5} />
-      </motion.div>
-
-      <motion.p
-        initial={{ opacity: 0, x: -15 }}
-        animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ delay: index * 0.15 + 0.4, duration: 0.5 }}
-        className="font-display text-3xl font-bold text-foreground mb-0"
-      >
-        {spec.value}
-      </motion.p>
-      <p className="text-xs uppercase tracking-widest text-primary mb-4">{spec.unit}</p>
-
-      <h3 className="font-display text-lg font-semibold text-foreground mb-2">{spec.title}</h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">{spec.description}</p>
-
-      {/* Bottom border animation */}
-      <motion.div
-        className="h-px bg-primary mt-5 origin-left"
-        initial={{ scaleX: 0 }}
-        animate={inView ? { scaleX: 1 } : {}}
-        transition={{ delay: index * 0.15 + 0.6, duration: 0.8, ease: "easeOut" }}
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{ background: "radial-gradient(circle at 50% 0%, hsl(42 100% 50% / 0.06), transparent 70%)" }}
       />
+
+      <div className="relative">
+        <motion.div
+          initial={{ scale: 0, rotate: -45 }}
+          animate={inView ? { scale: 1, rotate: 0 } : {}}
+          transition={{ delay: index * 0.15 + 0.3, duration: 0.5, type: "spring", stiffness: 200 }}
+        >
+          <motion.div
+            whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}
+          >
+            <spec.icon className="text-primary mb-4 group-hover:drop-shadow-[0_0_8px_hsl(42_100%_50%/0.5)] transition-all duration-300" size={28} strokeWidth={1.5} />
+          </motion.div>
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, x: -15 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ delay: index * 0.15 + 0.4, duration: 0.5 }}
+          className="font-display text-3xl font-bold text-foreground mb-0"
+        >
+          {spec.value}
+        </motion.p>
+        <p className="text-xs uppercase tracking-widest text-primary mb-4">{spec.unit}</p>
+
+        <h3 className="font-display text-lg font-semibold text-foreground mb-2">{spec.title}</h3>
+        <p className="text-sm text-muted-foreground leading-relaxed">{spec.description}</p>
+
+        <motion.div
+          className="h-px bg-primary mt-5 origin-left"
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: 1 } : {}}
+          transition={{ delay: index * 0.15 + 0.6, duration: 0.8, ease: "easeOut" }}
+        />
+      </div>
     </motion.div>
   );
 };
@@ -64,16 +75,17 @@ const SpecsSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/30 to-transparent" />
 
       {/* Floating particles */}
-      {[...Array(5)].map((_, i) => (
+      {[...Array(8)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 rounded-full bg-primary/20"
-          style={{ left: `${20 + i * 15}%`, top: `${30 + i * 10}%` }}
+          style={{ left: `${10 + i * 11}%`, top: `${20 + (i % 3) * 25}%` }}
           animate={{
-            y: [0, -30, 0],
-            opacity: [0.2, 0.5, 0.2],
+            y: [0, -40, 0],
+            x: [0, (i % 2 === 0 ? 15 : -15), 0],
+            opacity: [0.1, 0.4, 0.1],
           }}
-          transition={{ duration: 3 + i, repeat: Infinity, delay: i * 0.5 }}
+          transition={{ duration: 3 + i * 0.5, repeat: Infinity, delay: i * 0.3 }}
         />
       ))}
 
