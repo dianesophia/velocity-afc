@@ -1,9 +1,27 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import brandLamborghini from "@/assets/brand-lamborghini.png";
+import brandFerrari from "@/assets/brand-ferrari.png";
+import brandPorsche from "@/assets/brand-porsche.png";
+import brandMclaren from "@/assets/brand-mclaren.png";
+import brandAstonMartin from "@/assets/brand-aston-martin.png";
+import brandBugatti from "@/assets/brand-bugatti.png";
+import brandBentley from "@/assets/brand-bentley.png";
+import brandRollsRoyce from "@/assets/brand-rolls-royce.png";
+import brandMaserati from "@/assets/brand-maserati.png";
+import brandPagani from "@/assets/brand-pagani.png";
 
 const brands = [
-  "Lamborghini", "Ferrari", "Porsche", "McLaren", "Aston Martin",
-  "Bugatti", "Bentley", "Rolls-Royce", "Maserati", "Pagani",
+  { name: "Lamborghini", logo: brandLamborghini },
+  { name: "Ferrari", logo: brandFerrari },
+  { name: "Porsche", logo: brandPorsche },
+  { name: "McLaren", logo: brandMclaren },
+  { name: "Aston Martin", logo: brandAstonMartin },
+  { name: "Bugatti", logo: brandBugatti },
+  { name: "Bentley", logo: brandBentley },
+  { name: "Rolls-Royce", logo: brandRollsRoyce },
+  { name: "Maserati", logo: brandMaserati },
+  { name: "Pagani", logo: brandPagani },
 ];
 
 const BrandsCarousel = () => {
@@ -29,7 +47,6 @@ const BrandsCarousel = () => {
         </motion.div>
       </div>
 
-      {/* Infinite scrolling marquee */}
       <div className="relative">
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
@@ -37,11 +54,16 @@ const BrandsCarousel = () => {
         <div className="flex animate-marquee whitespace-nowrap">
           {[...brands, ...brands].map((brand, i) => (
             <div
-              key={`${brand}-${i}`}
-              className="mx-8 flex-shrink-0 glass-panel px-8 py-4 rounded-lg"
+              key={`${brand.name}-${i}`}
+              className="mx-6 flex-shrink-0 glass-panel px-6 py-4 rounded-lg flex items-center gap-4 hover:border-primary/40 transition-colors duration-300"
             >
-              <span className="font-display text-lg md:text-xl font-semibold text-foreground/70 hover:text-primary transition-colors duration-300 cursor-default">
-                {brand}
+              <img
+                src={brand.logo}
+                alt={brand.name}
+                className="h-10 w-10 object-contain"
+              />
+              <span className="font-display text-base md:text-lg font-semibold text-foreground/70">
+                {brand.name}
               </span>
             </div>
           ))}
