@@ -20,7 +20,7 @@ const HeroSection = () => {
       y: 0,
       opacity: 1,
       rotateX: 0,
-      transition: { delay: 0.6 + i * 0.05, duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+      transition: { delay: 0.6 + i * 0.05, duration: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
     }),
   };
 
